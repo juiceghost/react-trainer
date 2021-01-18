@@ -15,22 +15,22 @@ function Navbar() {
 }
 
 function ContactForm(props) {
-  const [name, setName] = useState('');
+  //const [name, setName] = useState('');
 
-  const handleSubmit = (e) => {
+  /* const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Submitting name: ${name}`);
-    setName('');
-  }
+    alert(`Submitting name: ${props.name}`);
+    props.setName('');
+  } */
 
-  console.log("ContactForm ran! " + name)
+  console.log("ContactForm ran! " + props.name)
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={props.handleSubmit}>
       <label>Your name:
       <input 
       type="text"
-      value={name}
-      onChange={e => setName(e.target.value)}
+      value={props.name}
+      onChange={e => props.setName(e.target.value)}
       ></input>
       </label>
       <input type="submit" value="Submit"></input>
@@ -47,10 +47,18 @@ function ThankYou() {
 }
 
 function App() {
+  const [name, setName] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Submitting name: ${name}`);
+    setName('');
+  }
+
   return (
     <div>
       <Navbar />
-      <ContactForm />
+      <ContactForm name={name} setName={setName} handleSubmit={handleSubmit} />
       <ThankYou />
       <h1>Fresh start!</h1>
     </div>
