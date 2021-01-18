@@ -48,18 +48,33 @@ function ThankYou() {
 
 function App() {
   const [name, setName] = useState('');
+  const [showForm, setShowForm] = useState(true);
+  const [showThanks, setShowThanks] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Submitting name: ${name}`);
     setName('');
+    setShowForm(false);
+    setShowThanks(true);
   }
+// A && B returns the value A if A can be coerced into false; otherwise, it returns B.
 
   return (
     <div>
       <Navbar />
-      <ContactForm name={name} setName={setName} handleSubmit={handleSubmit} />
-      <ThankYou />
+      {showForm ? <ContactForm 
+      name={name} 
+      setName={setName} 
+      handleSubmit={handleSubmit} /> : null}
+      {showThanks ? <ThankYou /> : null}
+
+      {/*showForm && <ContactForm 
+      name={name} 
+      setName={setName} 
+      handleSubmit={handleSubmit} />*/}
+      
+      {/*showThanks && <ThankYou />*/}
       <h1>Fresh start!</h1>
     </div>
   );
